@@ -19,9 +19,11 @@ LCYAN='\033[1;36m'
 WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
-CONF=$HOME/.bookmarks.conf
+CONF=$HOME/./bookmarks.conf
 VI=nvim
 DIR=$HOME
+COLOR1=$LBLUE
+COLOR2=$LGREEN
 declare -A BOOKMARKS
 declare -a KEYS
 
@@ -36,9 +38,16 @@ clear
 
 echo
 
+i=0
 for k in "${KEYS[@]}"
 do
-    echo -e "[ $YELLOW$k$NC ] : $LGREEN${BOOKMARKS[$k]}$NC"
+    odd=$(($i % 2))
+    let "i+=1"
+    if [ "$odd" -ne "0" ]; then
+        echo -e "[ $COLOR1$k$NC ] : $COLOR1${BOOKMARKS[$k]}$NC"
+    else
+        echo -e "[ $COLOR2$k$NC ] : $COLOR2${BOOKMARKS[$k]}$NC"
+    fi
 done
 
 echo
